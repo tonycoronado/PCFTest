@@ -16,6 +16,8 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-	
 
+	UPROPERTY(EditAnywhere, Category="Combat")
+	//Using new TObjectPtr, no need for *
+	TObjectPtr<USkeletalMeshComponent> Weapon; 
 };
