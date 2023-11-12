@@ -1,24 +1,28 @@
 // PCF Test
 
 
-#include "Character/EnemyCharacter.h"
+#include "Player/OutriderPlayerState.h"
 
 #include "AbilitySystem/OutriderAbilitySystemComponent.h"
 #include "AbilitySystem/OutriderAttributeSet.h"
 
-//Constructor
-AEnemyCharacter::AEnemyCharacter()
+AOutriderPlayerState::AOutriderPlayerState()
 {
+
 	AbilitySystemComponent = CreateDefaultSubobject<UOutriderAbilitySystemComponent>("AbilitySystemComponent");
-	// only if replication is needed
+	//Only if replication is needed
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 
 	AttributeSet = CreateDefaultSubobject<UOutriderAttributeSet>("AttributeSet");
+	
+	// a higher update frequency is needed since GAS component and attributes will be set on here -only replication
+	NetUpdateFrequency = 100.0f;
+
+	
 }
 
-void AEnemyCharacter::BeginPlay()
+UAbilitySystemComponent* AOutriderPlayerState::GetAbilitySystemComponent() const
 {
-	Super::BeginPlay();
-	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	return AbilitySystemComponent;
 }

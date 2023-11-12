@@ -13,5 +13,8 @@ UCLASS()
 class PCF_TEST_API AEnemyCharacter : public ABaseCharacter
 {
 	GENERATED_BODY()
-	
+public:
+	AEnemyCharacter();
+protected:
+	virtual void BeginPlay() override;
 };
